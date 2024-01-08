@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUISample.MainPage"
+             xmlns:local="clr-namespace:MAUISample">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label"
+                   x:Key="CustomLabelStyle">
+                <Setter Property="Text"
+                        Value="{Binding SelectedItem,Mode=TwoWay,Source={x:Reference vm}}"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout x:Name="stack">
+        <Button Text="set selected Item"
+                Command="{Binding ListViewSelectionChangedCommand}"
+                x:Name="btn"
+                CommandParameter="{x:Reference label}"
+                HeightRequest="50" />
+        <Button Text="ChangeBinding"
+                Clicked="Button_Clicked_1"
+                x:Name="btn1" />
+        <Label HeightRequest="50"
+               Background="red"
+               Style="{StaticResource CustomLabelStyle}"
+               x:Name="label" />
+    </StackLayout>
+
+</ContentPage>
